@@ -35,10 +35,19 @@ while i < len(str(number)):
 # Не нужно решать задачу так:
 # print("a = ", b, "b = ", a) - это неправильное решение!
 
-print('Задача №2')
+print('Задача №2. Решение 1.')
 a = int(input('Введите число A: '))
 b = int(input('Введите число B: '))
 a, b = b, a
+print(f'A = {a}')
+print(f'B = {b}')
+
+print('Задача №2. Решение 2.')
+a = int(input('Введите число A: '))
+b = int(input('Введите число B: '))
+a = a + b
+b = a - b
+a = a - b
 print(f'A = {a}')
 print(f'B = {b}')
 
