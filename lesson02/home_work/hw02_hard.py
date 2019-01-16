@@ -1,10 +1,33 @@
+__author__ = 'Поздняков Александр Алексеевич'
+
 # Задание-1: уравнение прямой вида y = kx + b задано в виде строки.
 # Определить координату y точки с заданной координатой x.
 
 equation = 'y = -12x + 11111140.2121'
 x = 2.5
 # вычислите и выведите y
+print('Задание №1')
+n = 1
+tmp_list = []
+for i in equation.split()[2:]:
+    n += 1
+    if i.count('x') and len(i) > 1:
+        tmp = ''
+        for j in i:
+            if j.isdigit() or j == '-':
+                tmp += j
+            else:
+                tmp += ' * ' + j
+        tmp_list += tmp.split()
+    else:
+        tmp_list.append(i)
 
+if tmp_list[3] == '+':
+    print(float(tmp_list[0]) * x + float(tmp_list[-1]))
+elif tmp_list[3] == '-':
+    print(float(tmp_list[0]) * x - float(tmp_list[-1]))
+# вариант через eval()
+# print(eval(''.join(lst_equation)))
 
 # Задание-2: Дата задана в виде строки формата 'dd.mm.yyyy'.
 # Проверить, корректно ли введена дата.
@@ -17,13 +40,40 @@ x = 2.5
 #  (т.е. 2 символа для дня, 2 - для месяца, 4 - для года)
 
 # Пример корректной даты
-date = '01.11.1985'
+# date = '08.12.1989'
 
 # Примеры некорректных дат
-date = '01.22.1001'
-date = '1.12.1001'
-date = '-2.10.3001'
+# date = '01.22.1001'
+# date = '1.12.1001'
+# date = '-2.10.3001'
 
+print('Задание №2')
+date = input('Введите дату[dd.mm.yyyy]: ')
+dm = {'01': 31,
+      '03': 31,
+      '05': 31,
+      '07': 31,
+      '08': 31,
+      '10': 31,
+      '12': 31,
+      '04': 30,
+      '06': 30,
+      '09': 30,
+      '11': 30,
+      '02': 29}
+
+lst = date.split('.')
+if len(lst[0]) == 2 and len(lst[1]) == 2 and len(lst[2]) == 4:
+    if lst[0].isdigit() and lst[1].isdigit() and lst[2].isdigit():
+        if int(lst[1]) < 13 and int(lst[2]) < 10000 and int(lst[0]) < dm[
+            lst[1]]:
+            print('Дата корректна')
+        else:
+            print('Дата не корректна')
+    else:
+        print('Дата не корректна')
+else:
+    print('Дата не корректна')
 
 # Задание-3: "Перевёрнутая башня" (Задача олимпиадного уровня)
 #
@@ -54,3 +104,22 @@ date = '-2.10.3001'
 #
 # Вход: 11
 # Выход: 5 3
+print('Задание №3')
+number = int(input('Введите номер комнаты: '))
+# number = 13
+table = 1
+floor = 1
+n = 1
+while True:
+    for i in range(table):
+        for j in range(table):
+            n += 1
+            if n > number:
+                print(f'{floor} этаж комната № {j + 1}')
+                break
+        floor += 1
+        if n > number:
+            break
+    if n > number:
+        break
+    table += 1
