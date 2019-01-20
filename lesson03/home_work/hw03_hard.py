@@ -82,9 +82,10 @@ print()
 # то их ЗП уменьшается пропорционально, а за каждый час переработки
 # они получают удвоенную ЗП, пропорциональную норме.
 # Кол-во часов, которые были отработаны, указаны в файле "data/hours_of"
+import os.path
 print('Задание №2')
 workers_list = []
-with open('data/workers') as workers:
+with open(os.path.join('data','workers')) as workers:
     workers_file = workers.read()
     tmp_list = workers_file.splitlines()
     for i in tmp_list[1:]:
@@ -92,7 +93,7 @@ with open('data/workers') as workers:
         workers_list += [{'name': name, 'last_name': last_name, 'cash': cash,
                           'post': post, 'plan': plan}]
 
-with open('data/hours_of') as hours_of:
+with open(os.path.join('data','hours_of')) as hours_of:
     hours_of_file = hours_of.read()
     tmp_list = hours_of_file.splitlines()
     for i in tmp_list[1:]:
@@ -131,13 +132,13 @@ import re
 
 print('Задание №3')
 alphabet = list(map(chr, range(ord('А'), ord('Я') + 1)))
-with open('data/fruits.txt') as fruits:
+with open(os.path.join('data','fruits.txt')) as fruits:
     file_fruits = fruits.read()
     list_fruits = file_fruits.splitlines()
 for i in alphabet:
     tmp_list = list(
         filter(lambda x: re.findall(r'^{}'.format(i), x), list_fruits))
     if len(tmp_list) != 0:
-        with open(f'data/fruits_{i}.txt', 'w') as file:
+        with open(os.path.join('data',f'fruits_{i}.txt'), 'w') as file:
             file.write('\n'.join(tmp_list))
 print('Файлы сформированы')
