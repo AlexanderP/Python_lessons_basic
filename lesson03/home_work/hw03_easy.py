@@ -5,6 +5,7 @@ __author__ = 'Поздняков Александр Алексеевич'
 # до кол-ва знаков (кол-во знаков передается вторым аргументом).
 # Округление должно происходить по математическим правилам (0.6 --> 1, 0.4 --> 0).
 # Для решения задачи не используйте встроенные функции и функции из модуля math.
+
 print('Задание №1')
 def my_round(number, ndigits):
     ints, digits = str(number).split('.')
@@ -14,7 +15,10 @@ def my_round(number, ndigits):
         return number
     elif ndigits == 0:
         if int(digits[0]) >= 5:
-            ints += 1
+            if ints < 0:
+                ints -= 1
+            else:
+                ints += 1
         return ints
     else:
         if int(digits[ndigits]) >= 5:
@@ -26,16 +30,25 @@ def my_round(number, ndigits):
                     if n != 0:
                         digits[n-1] += 1
                     else:
-                        ints += 1
+                        if ints < 0:
+                            ints -= 1
+                        else:
+                            ints += 1
                 else:
                     break
                 n -= 1
         digits = [str(i) for i in digits]
-        return float(str(ints) + '.' + ''.join(digits[:ndigits]))
+        return str(ints) + '.' + ''.join(digits[:ndigits])
 
 print(my_round(2.1234567, 5))
 print(my_round(2.1999967, 5))
 print(my_round(2.9999967, 5))
+print(my_round(-2.1234567, 5))
+print(my_round(-2.1999967, 5))
+print(my_round(-2.9999967, 5))
+print(my_round(2.9999967, 0))
+print(my_round(-2.9999967, 0))
+print(my_round(-2.1199967, 1))
 print()
 
 # Задание-2:
