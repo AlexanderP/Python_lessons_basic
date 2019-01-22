@@ -36,6 +36,6 @@ print(list_3)
 print("Сортируем по условию:")
 tmp_list = []
 for i in list_3:
-    if (i % 3 == 0 and i % 4 != 0 and i > 0) or (i > 0 and i % 4 != 0):
+    if (i % 3 == 0 and i % 4 != 0 and i > 0):
         tmp_list.append(i)
 print(tmp_list)
