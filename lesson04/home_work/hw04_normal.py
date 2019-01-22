@@ -115,4 +115,5 @@ for i in re.finditer(pattern, read_int):
     tmp_list.append(i[0])
 print('Самая длинная последовательность чисел в случайном'
       ' числе из файла random_int: ')
-print(max(map(int, tmp_list)))
+# print(max(map(int, tmp_list))) #не будет работать с 00000 :(
+print(max(tmp_list, key=len))
