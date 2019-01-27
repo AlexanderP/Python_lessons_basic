@@ -2,6 +2,7 @@ import os
 import os.path
 import re
 import shutil
+import sys
 
 
 def check_name(name):
@@ -71,6 +72,23 @@ def my_rmdirs(*dirs):
             print(f"Директория {_dir} не существует")
 
 
+def my_cp(name, copy_name):
+    copy_path = os.path.join(os.getcwd(), copy_name)
+    file_path = os.path.join(os.getcwd(), name)
+    if os.path.exists(copy_path):
+        print(f"Ошибка. Файл(директория) с именем {copy_name} существует.")
+        return
+    if os.path.isdir(file_path):
+        print(f"Ошибка. {name} директория.")
+        return
+    elif os.path.isfile(file_path):
+        shutil.copy(file_path, copy_path)
+        print(f"Файл скопирован. {name} --> {copy_name}")
+    else:
+        print(f"Ошибка. Файла с именем {name} не существует.")
+        return
+
+
 # Задача-1:
 # Напишите скрипт, создающий директории dir_1 - dir_9 в папке,
 # из которой запущен данный скрипт.
@@ -90,3 +108,5 @@ if __name__ == '__main__':
     my_ls_dir()
     # удалим их
     my_rmdirs(*[f'dir_{x}' for x in range(1, 10)])
+    name_file = sys.argv[0]
+    my_cp(name_file, name_file + '.copy')
