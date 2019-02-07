@@ -20,5 +20,39 @@
 
 """
 
-import csv
-import json
+import openweather
+import sys
+
+def print_help():
+    print("--csv filename [<город>] - экспорт базы в формат csv")
+    print("--json filename [<город>] - экспорт базы в формат json")
+    print("--html filename [<город>] - экспорт базы в формат html")
+
+db = openweather.Sqlite()
+
+key_list = ["--csv","--json","--html"]
+
+try:
+    filename_name = sys.argv[2]
+except IndexError:
+    filename_name = None
+
+try:
+    key = sys.argv[1]
+except IndexError:
+    key = None
+
+try:
+    city = sys.argv[3]
+except IndexError:
+    city = ""
+
+
+if key:
+    if key in key_list and not filename_name is None:
+        db.import_file(filename_name, city)
+    elif key == 'help':
+        print_help()
+    else:
+        print("Задан неверный ключ")
+        print("Укажите ключ help для получения справки")
