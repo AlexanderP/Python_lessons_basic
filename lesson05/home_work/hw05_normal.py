@@ -1,3 +1,7 @@
+import os
+
+import easy
+
 # Задача-1:
 # Напишите небольшую консольную утилиту,
 # позволяющую работать с папками текущей директории.
@@ -13,3 +17,36 @@
 # Для решения данной задачи используйте алгоритмы из задания easy,
 # оформленные в виде соответствующих функций,
 # и импортированные в данный файл из easy.py
+
+if __name__ == '__main__':
+    while True:
+        print(("Выберите действие:\n"
+               "1. Перейти в директорию\n"
+               "2. Создать директорию.\n"
+               "3. Удалить директорию.\n"
+               "4. Посмотреть содержимое директории\n"
+               "5. Выход "))
+        answer = input('Ваш ответ: ')
+        if answer == '5':
+            print('Работа программы завершается')
+            break
+        print()
+        do = {
+            "1": easy.my_chdir,
+            "4": easy.my_ls,
+            "3": easy.my_rmdirs,
+            "2": easy.my_mkdirs
+        }
+        if answer in [str(x) for x in range(1, 4)]:
+            answer_name = input('Введите название директории: ')
+            if not easy.check_name(answer_name):
+                print('Некорректное имя директории')
+                continue
+            dir = answer_name
+        else:
+            dir = os.curdir
+        if do.get(answer):
+            do[answer](dir)
+            print()
+        else:
+            print("Неверный ключ")
